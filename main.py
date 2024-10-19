@@ -86,7 +86,11 @@ def save_registered_users(users):
 
 # Start command handler
 async def start(update: Update, context):
-    await update.message.reply_text("Welcome to the Fantasy League! Use /register to join the league.")
+    user = update.message.from_user
+    display_name = user.first_name
+    if user.last_name:
+        display_name += f" {user.last_name}"
+    await update.message.reply_text(f"Welcome to the Fantasy League {display_name}! Use /register to join the league.")
 
 # Register command handler
 async def register(update: Update, context):
